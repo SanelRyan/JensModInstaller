@@ -1,0 +1,28 @@
+{
+  "name": "jensmodinstaller",
+  "version": "1.0.0",
+  "description": "Mod Installer",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "author": "Ben",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "electron": "^15.1.2",
+    "electron-builder": "^22.13.1"
+  },
+  "dependencies": {
+    "appdata-path": "^1.0.0",
+    "fs-extra": "^8.1.0",
+    "nodejs-file-downloader": "^4.7.4"
+  },
+  "build": {
+    "appId": "ben.benny",
+    "mac": {
+      "category": "ben.benny.installer.mod"
+    }
+  }
+}

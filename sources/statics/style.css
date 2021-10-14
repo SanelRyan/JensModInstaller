@@ -1,0 +1,19 @@
+body {
+	background-image: url("https://media.discordapp.net/attachments/885546102739329025/896862281797881866/ezgif.com-gif-maker.gif?width=350&height=500");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.center {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.center-top {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
