@@ -1,4 +1,4 @@
-const files = require("./list.json");
+const request = require("request");
 const Downloader = require('nodejs-file-downloader');
 const { app, BrowserWindow, dialog, ipcMain } = require('electron');
 const path = require('path');
@@ -34,27 +34,34 @@ app.on('window-all-closed', function () {
 });
 
 ipcMain.on('install', (event, arg) => {
-	var toSelect = files.files;
-	if (arg) {
-		toSelect = files.premiumFiles;
-	}
-	fsExtra.emptyDirSync(apd(".minecraft/mods"));
-	for (var i = toSelect.length - 1; i >= 0; i--) {
-		const item = toSelect[i];		
-		const downloader = new Downloader({
-		url: item,	 
-			directory: apd(".minecraft/mods"),
-			cloneFiles:false
-		})
-		try {
-			downloader.download();
-		} catch (error) {
-
+	request('https://raw.githubusercontent.com/SanelRyan/JensModInstaller/main/list.json', {json:true}, (err, res, body) => {
+		if (err) { return dialog.showMessageBox({
+			message: "Failed to fetch mod list from cloud",
+			type: "error",
+			title: "Error!"
+		}); }
+		var toSelect = body.files;
+		if (arg) {
+			toSelect = body.premiumFiles;
 		}
-	}
-	dialog.showMessageBox({
-		message: "Successfully installed all mods!",
-		type: "info",
-		title: "Success!"
+		fsExtra.emptyDirSync(apd(".minecraft/mods"));
+		for (var i = toSelect.length - 1; i >= 0; i--) {
+			const item = toSelect[i];		
+			const downloader = new Downloader({
+			url: item,	 
+				directory: apd(".minecraft/mods"),
+				cloneFiles:false
+			})
+			try {
+				downloader.download();
+			} catch (error) {
+	
+			}
+		}
+		dialog.showMessageBox({
+			message: "Successfully installed all mods!",
+			type: "info",
+			title: "Success!"
+		});
 	});
 });

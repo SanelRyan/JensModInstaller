@@ -17,7 +17,8 @@
   "dependencies": {
     "appdata-path": "^1.0.0",
     "fs-extra": "^8.1.0",
-    "nodejs-file-downloader": "^4.7.4"
+    "nodejs-file-downloader": "^4.7.4",
+    "request": "^2.88.2"
   },
   "build": {
     "appId": "ben.benny",
